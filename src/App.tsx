@@ -8,6 +8,9 @@ import ActivityDetailsPage from './pages/ActivityDetailsPage';
 import AuthPage from './pages/AuthPage';
 import MapPage from './pages/MapPage';
 import { AuthProvider } from './context/AuthContext';
+import MyBookingsPage from './pages/MyBookingsPage';
+import AdminDashboard from './pages/AdminDashboard';
+import ProviderNotifications from './pages/ProviderNotifications';
 
 function App() {
   return (
@@ -22,6 +25,9 @@ function App() {
             <Route path="/packages/:id" element={<ActivityDetailsPage />} />
             <Route path="/map" element={<MapPage />} />
             <Route path="/login" element={<AuthPage />} />
+            <Route path="/my-bookings" element={<MyBookingsPage />} />
+            <Route path="/admin" element={<AdminDashboard />} />
+            <Route path="/provider-notifications" element={<ProviderNotifications />} />
           </Routes>
         </Layout>
       </AuthProvider>
