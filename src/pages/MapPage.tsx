@@ -1,19 +1,17 @@
 import React, { useEffect } from 'react';
 import { MapContainer, TileLayer, Marker, Popup, useMap } from 'react-leaflet';
+import L from 'leaflet';
 import { Card } from '../components/ui/Card';
 import 'leaflet/dist/leaflet.css';
 
-// Component to handle geolocation
 const LocateUser: React.FC = () => {
   const map = useMap();
 
   useEffect(() => {
-    // Try to get user's current location
     navigator.geolocation.getCurrentPosition(
       (position) => {
         const { latitude, longitude } = position.coords;
-        map.setView([latitude, longitude], 14); // Zoom to user's location
-        // Add a marker for the user's location
+        map.setView([latitude, longitude], 14);
         L.marker([latitude, longitude])
           .addTo(map)
           .bindPopup('You are here!')
@@ -21,8 +19,12 @@ const LocateUser: React.FC = () => {
       },
       (error) => {
         console.error('Geolocation error:', error);
-        // Fallback to Mirissa if geolocation fails
         map.setView([5.9485, 80.4703], 14);
+        // Add Mirissa marker as fallback
+        L.marker([5.9485, 80.4703])
+          .addTo(map)
+          .bindPopup('Mirissa')
+          .openPopup();
       }
     );
   }, [map]);
@@ -31,7 +33,6 @@ const LocateUser: React.FC = () => {
 };
 
 const MapPage: React.FC = () => {
-  // Fix for Leaflet marker icons
   useEffect(() => {
     delete (L.Icon.Default.prototype as any)._getIconUrl;
     L.Icon.Default.mergeOptions({
@@ -44,9 +45,9 @@ const MapPage: React.FC = () => {
   return (
     <div className="min-h-screen p-6">
       <Card className="p-6">
-        <h2 className="mb-4 text-2xl font-bold">Your Location</h2>
+        <h2 className="mb-4 text-2xl font-bold">Our Location</h2>
         <MapContainer
-          center={[5.9485, 80.4703]} // Default to Mirissa
+          center={[5.9485, 80.4703]}
           zoom={14}
           style={{ height: '24rem', width: '100%', borderRadius: '0.5rem' }}
           className="z-0"
@@ -57,6 +58,9 @@ const MapPage: React.FC = () => {
           />
           <LocateUser />
         </MapContainer>
+        <p className="mt-4 text-gray-600">
+          Discover Mirissa, a coastal paradise perfect for your next adventure. Plan your sports tour with us starting from this vibrant location!
+        </p>
       </Card>
     </div>
   );
