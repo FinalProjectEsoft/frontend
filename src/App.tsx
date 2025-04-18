@@ -6,6 +6,7 @@ import AboutPage from './pages/AboutPage';
 import ActivitiesPage from './pages/ActivitiesPage';
 import ActivityDetailsPage from './pages/ActivityDetailsPage';
 import AuthPage from './pages/AuthPage';
+import MapPage from './pages/MapPage';
 import { AuthProvider } from './context/AuthContext';
 
 function App() {
@@ -19,6 +20,7 @@ function App() {
             <Route path="/activities" element={<ActivitiesPage />} />
             <Route path="/activities/:id" element={<ActivityDetailsPage />} />
             <Route path="/packages/:id" element={<ActivityDetailsPage />} />
+            <Route path="/map" element={<MapPage />} />
             <Route path="/login" element={<AuthPage />} />
           </Routes>
         </Layout>
